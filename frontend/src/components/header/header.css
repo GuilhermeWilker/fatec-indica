@@ -1,0 +1,38 @@
+.header__nav {
+    display: flex;
+    align-items: center;
+
+    gap: 1.5em;
+}
+
+.nav__username {
+    font-size: 1em;
+    color: white;
+    font-weight: 400;
+}
+
+.nav__link-btn {
+    position: relative;
+    border: 2px solid #edadad;
+  color: #fff;
+  padding: 5px 40px;
+  border-radius: 45px;
+  background-color: #e89c9c;
+  transition: 0.3s;
+}
+
+.nav__link-btn:hover {
+    background-color: #f78585
+}
+
+.tooltip {
+    font-size: .9em;
+    position: absolute;
+    top: -1em;
+    right: 0;
+    
+    background-color: #f78585;
+    border: 3px solid white;
+    border-radius: 100%;
+    padding: .1em .6em;
+}

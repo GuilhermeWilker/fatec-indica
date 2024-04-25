@@ -1,0 +1,149 @@
+label {
+    display: block;
+    padding-bottom: 5px !important;
+    padding-left: 0 !important;
+    width: 100%;
+  }
+  
+  input,
+  select {
+    display: block;
+    width: 80%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+  }
+  
+  .btn_form_admin {
+    padding: 7px;
+    border-radius: 4px;
+    width: 1px;
+    height: 45px;
+    border: 1px solid #dc7e7e;
+    background-color: #d47f7f;
+    color: #fff;
+    grid-row: 9/10;
+    margin-left: 10%;
+    margin-top: 30px;
+    position: relative;
+    top: 5em;
+    right: 31em;
+  }
+  
+  #switch {
+    width: 25px;
+    height: 20px;
+  }
+  
+  .aviso {
+    gap: 12px;
+  
+    border-bottom: 1px solid #c8c8c8;
+    margin-bottom: -8px !important;
+  }
+  
+  .main_login {
+    margin: 80px 0;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+  
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .form_login {
+    border-radius: 14px;
+    padding: 20px;
+  
+    width: 450px;
+  
+    display: flex;
+    flex-direction: column;
+  
+    align-items: center;
+  
+    box-shadow: 3px 10px 35px -10px #e8caca;
+  }
+  
+  .form_login img {
+    width: 150px;
+  }
+  
+  .form_login label {
+    margin-top: 15px;
+    align-self: flex-start;
+    padding-left: 0;
+    margin-left: 45px;
+  }
+  
+  .icon > img {
+    position: absolute;
+    top: 35.2em;
+    left: 50em;
+    transform: translateY(-50%);
+    width: 25px;
+    height: 25px;
+  }
+  
+  .icone {
+    position: relative;
+    top: -1.9em;
+    right: -14em;
+    transform: translateY(-50%);
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+  }
+  
+  #icone_ver_senha {
+    position: relative;
+    top: -1.9em;
+    right: -14em;
+    transform: translateY(-50%);
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+  }
+  
+  .icone_ver_senha-admin {
+    position: relative;
+    top: 5.2em;
+    left: 14em;
+    transform: translateY(-50%);
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+  }
+  
+  .icone_ver_senha_2 {
+    position: relative;
+    top: -8.9em;
+    left: 14em;
+    transform: translateY(-50%);
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+  }
+  
+  .esqueci_senha {
+    margin: 15px 0;
+  }
+  
+  .btn_login {
+    padding: 7px;
+    border-radius: 4px;
+  
+    width: 120px;
+    height: 45px;
+  
+    border: 1px solid #dc7e7e;
+    background-color: #d47f7f;
+    color: #fff;
+  }
+  
+  .card-modal__btn-container {
+    padding-bottom: 2em;
+  }
+  

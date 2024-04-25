@@ -1,0 +1,59 @@
+.content{
+    padding: 95px;
+}
+
+.content__card-container {
+    display: flex;
+    align-items: center;
+    gap: 5%;
+}
+
+.content__card-info {
+    width: 350px;
+    flex: 1;
+    min-height: 300px;
+  }
+
+  .content__card-info .line {
+    content: "";
+    background-color: #ffaa5c;
+  
+    width: 100%;
+    height: 8px;
+  
+    border-radius: 20px;
+    margin-bottom: 17px;
+  }
+
+.content__card-info:nth-child(2) .line {
+  content: "";
+  background-color: #5c8aff;
+
+  width: 100%;
+  height: 12px;
+
+  border-radius: 20px;
+  margin-bottom: 17px;
+}
+
+.content__card-info:nth-child(3) .line {
+    content: "";
+    background-color: #ff5cbe;
+  
+    width: 100%;
+    height: 12px;
+  
+    border-radius: 20px;
+    margin-bottom: 17px;
+  }
+ 
+
+  .card-info__title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .content__card-info p {
+    text-align: justify;
+  }
