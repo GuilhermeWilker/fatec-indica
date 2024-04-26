@@ -13,13 +13,12 @@ export default function Form() {
         curso_aluno: '',
         semestre_aluno: '',
         situtrabalho_aluno: '',
+        atuacao_aluno: '',
         email_aluno: '',
         senha_aluno: '',
         senhaconf_aluno: '',
         receber_vaga: ''
     })
-
-    console.log(formData)
 
     const [passwordRequirements, setPasswordRequirements] = useState({
         minLength: false,
@@ -126,9 +125,6 @@ export default function Form() {
                         <label htmlFor="cidade">Curso:*</label>
                         <select name="curso_aluno" value={formData.curso_aluno} onChange={handleChange} required>
                             <option value="">Selecione uma opção</option>
-                            <option value="Desenvolvimento de Software Multiplataforma">
-                                Desenvolvimento de Software Multiplataforma
-                            </option>
                             <option value="Gestão da Tecnologia da Informação">
                                 Gestão da Tecnologia da Informação
                             </option>
@@ -147,8 +143,6 @@ export default function Form() {
                             <option value="4°">4º Semestre</option>
                             <option value="5°">5º Semestre</option>
                             <option value="6°">6º Semestre</option>
-                            <option value="7°">7º Semestre</option>
-                            <option value="8°">8º Semestre</option>
                         </select>
                     </div>
                     <div className="form__div">
@@ -158,6 +152,16 @@ export default function Form() {
                             <option value="Sim">Sim</option>
                             <option value="Não">Não</option>
                         </select>
+                    </div>
+
+                    <div className="form__div">
+                        <label htmlFor="areaAtua">Qual a sua área de atuação?*</label>
+                        <input type="text"
+                            name="atuacao_aluno"
+                            placeholder="Analista de Sistemas"
+                            value={formData.atuacao_aluno}
+                            onChange={handleChange}
+                            required />
                     </div>
 
                 </>
@@ -275,6 +279,7 @@ export default function Form() {
                 curso_aluno: '',
                 semestre_aluno: '',
                 situtrabalho_aluno: '',
+                atuacao_aluno: '',
                 email_aluno: '',
                 senha_aluno: '',
                 senhaconf_aluno: '',

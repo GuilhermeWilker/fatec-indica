@@ -64,6 +64,7 @@ router.post("/cadastro/aluno", (req, res) => {
         curso_aluno,
         semestre_aluno,
         situtrabalho_aluno,
+        atuacao_aluno,
         email_aluno,
         senha_aluno,
         senhaconf_aluno,
@@ -81,11 +82,12 @@ router.post("/cadastro/aluno", (req, res) => {
             curso_aluno,
             semestre_aluno,
             situtrabalho_aluno,
+            atuacao_aluno,
             email_aluno,
             senha_aluno,
             senhaconf_aluno,
             receber_vaga
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `
 
     const values = [
@@ -98,6 +100,7 @@ router.post("/cadastro/aluno", (req, res) => {
         curso_aluno,
         semestre_aluno,
         situtrabalho_aluno,
+        atuacao_aluno,
         email_aluno,
         senha_aluno,
         senhaconf_aluno,
