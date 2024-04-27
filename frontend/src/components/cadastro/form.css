@@ -65,3 +65,15 @@
 .form__btns-container button:disabled {
     background-color: #a86c6c;
 }
+
+.form__icon-visibility-cadastro {
+    width: 1.8em;
+    position: absolute;
+    top: .8em;
+    right: 1em;
+}   
+
+.pass {
+    position: relative;
+    display: flex;
+}

@@ -1,9 +1,8 @@
-import express from 'express'
-import db from '../database/db.js'
-import ExcelJS from 'exceljs'
-import fs from 'fs'
+import express from 'express';
+import db from '../database/db.js';
+import ExcelJS from 'exceljs';
 
-const router = express.Router()
+const router = express.Router();
 
 router.get("/relatorio", (req, res) => {
     const workbook = new ExcelJS.Workbook();
@@ -14,6 +13,7 @@ router.get("/relatorio", (req, res) => {
     const sheet2 = workbook.addWorksheet("Vagas em Alta");
     const sheet3 = workbook.addWorksheet("Dados dos Alunos");
     const sheet4 = workbook.addWorksheet("Vagas por Local");
+    const sheet5 = workbook.addWorksheet("Alunos por Curso & Empregados");
 
     sheet1.columns = [
         { header: 'Código Vaga', key: 'cod_vaga' },
@@ -33,7 +33,9 @@ router.get("/relatorio", (req, res) => {
 
     sheet3.columns = [
         { header: 'Email Aluno', key: 'email_aluno' },
+        { header: 'Curso do Aluno', key: 'curso_aluno' },
         { header: 'Situação de Trabalho', key: 'situtrabalho_aluno' },
+        { header: 'Área de Atuação', key: 'atuacao_aluno' },
         { header: 'Idade', key: 'idade_aluno' }
     ];
 
@@ -44,6 +46,12 @@ router.get("/relatorio", (req, res) => {
         { header: 'Qtd de Visitas', key: 'qtd_visitas' },
         { header: 'Cargo', key: 'cargo_vaga' },
         { header: 'Nível do Cargo', key: 'nivelcargo_vaga' }
+    ];
+
+    sheet5.columns = [
+        { header: 'Qtd Alunos no Curso de Gestão da Tecnologia da Informação', key: 'total_GTI' },
+        { header: 'Qtd Alunos no Curso de Gestão de Energia e Eficiência Energética', key: 'total_GEE' },
+        { header: 'Qtd Alunos Empregados', key: 'total_alunos_empregados' }
     ];
 
     // Consulta para o Relatório de Vagas
@@ -107,6 +115,8 @@ router.get("/relatorio", (req, res) => {
             SELECT 
                 email_aluno,
                 situtrabalho_aluno,
+                atuacao_aluno,
+                curso_aluno,
                 idade_aluno
             FROM 
                 fatecindica.tb_cadastro_aluno
@@ -123,6 +133,8 @@ router.get("/relatorio", (req, res) => {
                     sheet3.addRow({
                         email_aluno: aluno.email_aluno,
                         situtrabalho_aluno: aluno.situtrabalho_aluno,
+                        atuacao_aluno: aluno.atuacao_aluno,
+                        curso_aluno: aluno.curso_aluno,
                         idade_aluno: aluno.idade_aluno
                     });
                 });
@@ -158,15 +170,45 @@ router.get("/relatorio", (req, res) => {
                         });
                     });
 
-                    // Salva o arquivo Excel após todas as consultas estarem completas
-                    workbook.xlsx.writeFile(filename)
-                        .then(() => {
-                            res.download(import.meta.dirname + `../../../${filename}`)
-                        })
-                        .catch(err => {
-                            console.error("Erro ao salvar arquivo Excel:", err);
-                            res.status(500).json({ error: "Erro interno do servidor ao salvar arquivo Excel" });
+                    // Consulta para os Alunos por Curso & Empregados
+                    const queryAlunosPorCursoEmpregados = `
+                    SELECT 
+                        (SELECT COUNT(*) 
+                         FROM fatecindica.tb_cadastro_aluno 
+                         WHERE situtrabalho_aluno = 'Sim' OR situtrabalho_aluno = 'sim' OR situtrabalho_aluno = 'SIM') AS total_alunos_empregados,
+                        
+                        (SELECT SUM(CASE WHEN curso_aluno = 'Gestão da Tecnologia da Informação' THEN 1 ELSE 0 END) 
+                         FROM fatecindica.tb_cadastro_aluno) AS total_GTI,
+                        
+                        (SELECT SUM(CASE WHEN curso_aluno = 'Gestão de Energia e Eficiência Energética' THEN 1 ELSE 0 END) 
+                         FROM fatecindica.tb_cadastro_aluno) AS total_GEE;
+                    `;
+
+                    db.query(queryAlunosPorCursoEmpregados, (err, result) => {
+                        if (err) {
+                            console.error("Erro ao buscar alunos por curso e empregados:", err);
+                            res.status(500).json({ error: "Erro interno do servidor" });
+                            return;
+                        }
+
+                        const { total_alunos_empregados, total_GTI, total_GEE } = result[0];
+
+                        sheet5.addRow({
+                            total_alunos_empregados: total_alunos_empregados,
+                            total_GTI: total_GTI,
+                            total_GEE: total_GEE
                         });
+
+                        // Salva o arquivo Excel após todas as consultas estarem completas
+                        workbook.xlsx.writeFile(filename)
+                            .then(() => {
+                                res.download(import.meta.dirname + `../../../backend/${filename}`)
+                            })
+                            .catch(err => {
+                                console.error("Erro ao salvar arquivo Excel:", err);
+                                res.status(500).json({ error: "Erro interno do servidor ao salvar arquivo Excel" });
+                            });
+                    });
                 });
             });
         });

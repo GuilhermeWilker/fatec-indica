@@ -22,6 +22,17 @@ export default function Form() {
         containsNumber: false
     });
 
+    const [visibility, setVisibility] = useState(false);
+    const [confirmVisibility, setConfirmVisibility] = useState(false);
+
+    const handlePasswordVisibility = () => {
+        setVisibility(!visibility);
+    }
+
+    const handleConfirmPasswordVisibility = () => {
+        setConfirmVisibility(!confirmVisibility);
+    }
+
     const StepDisplay = () => {
         if (step === 0) {
             return (
@@ -105,24 +116,40 @@ export default function Form() {
                 <>
                     <div className="form__div">
                         <label htmlFor="senha_admin">Senha:*</label>
-                        <input
-                            type="password"
-                            name="senha_admin"
-                            value={formData.senha_admin}
-                            onChange={handlePasswordChange}
-                            placeholder="******"
-                            required />
+                        <div className="pass">
+                            <input
+                                type={visibility ? 'text' : "password"}
+                                name="senha_admin"
+                                value={formData.senha_admin}
+                                onChange={handlePasswordChange}
+                                placeholder="******"
+                                required />
+                            <img
+                                onClick={handlePasswordVisibility}
+                                className='form__icon-visibility-cadastro'
+                                src={visibility ? '/images/olho.png' : '/images/visivel.png'}
+                                alt="" />
+                        </div>
+
                     </div>
 
                     <div className="form__div">
                         <label htmlFor="senhaconf_admin">Confirmar senha:*</label>
-                        <input
-                            type="password"
-                            name="senhaconf_admin"
-                            value={formData.senhaconf_admin}
-                            onChange={handleChange}
-                            placeholder="******"
-                            required />
+                        <div className="pass">
+                            <input
+                                type={confirmVisibility ? 'text' : "password"}
+                                name="senhaconf_admin"
+                                value={formData.senhaconf_admin}
+                                onChange={handleChange}
+                                placeholder="******"
+                                required />
+                            <img
+                                onClick={handleConfirmPasswordVisibility}
+                                className='form__icon-visibility-cadastro'
+                                src={confirmVisibility ? '/images/olho.png' : '/images/visivel.png'}
+                                alt="" />
+                        </div>
+
                     </div>
 
                     <div className="form__requirements">
@@ -144,6 +171,10 @@ export default function Form() {
 
                         <p style={{ color: passwordRequirements.containsNumber ? 'green' : 'red' }}>
                             Deve conter no mínimo um número!
+                        </p>
+
+                        <p style={{ color: isPasswordMatch ? 'green' : 'red' }}>
+                            As senhas devem ser iguais!
                         </p>
                     </div>
                 </>

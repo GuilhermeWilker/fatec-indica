@@ -19,7 +19,6 @@ export default function Form() {
         senhaconf_aluno: '',
         receber_vaga: ''
     })
-
     const [passwordRequirements, setPasswordRequirements] = useState({
         minLength: false,
         containsLowercase: false,
@@ -29,6 +28,16 @@ export default function Form() {
     })
 
     const [emailError, setEmailError] = useState(false);
+    const [visibility, setVisibility] = useState(false);
+    const [confirmVisibility, setConfirmVisibility] = useState(false);
+
+    const handlePasswordVisibility = () => {
+        setVisibility(!visibility);
+    }
+
+    const handleConfirmPasswordVisibility = () => {
+        setConfirmVisibility(!confirmVisibility);
+    }
 
     const StepDisplay = () => {
         if (step === 0) {
@@ -171,23 +180,39 @@ export default function Form() {
                 <>
                     <div className="form__div">
                         <label htmlFor="password">Senha:*</label>
-                        <input
-                            type="password"
-                            name="senha_aluno"
-                            placeholder="******"
-                            value={formData.senha_aluno}
-                            onChange={handlePasswordChange}
-                            required />
+                        <div className='pass'>
+                            <input
+                                type={visibility ? "text" : 'password'}
+                                name="senha_aluno"
+                                placeholder="******"
+                                value={formData.senha_aluno}
+                                onChange={handlePasswordChange}
+                                required />
+                            <img
+                                onClick={handlePasswordVisibility}
+                                className='form__icon-visibility-cadastro'
+                                src={visibility ? '/images/olho.png' : '/images/visivel.png'}
+                                alt="" />
+                        </div>
+
                     </div>
                     <div className="form__div">
                         <label htmlFor="confirm_password">Confirmar senha:*</label>
-                        <input
-                            type="password"
-                            name="senhaconf_aluno"
-                            placeholder="******"
-                            value={formData.senhaconf_aluno}
-                            onChange={handleChange}
-                            required />
+                        <div className="pass">
+                            <input
+                                type={confirmVisibility ? "text" : 'password'}
+                                name="senhaconf_aluno"
+                                placeholder="******"
+                                value={formData.senhaconf_aluno}
+                                onChange={handleChange}
+                                required />
+                            <img
+                                onClick={handleConfirmPasswordVisibility}
+                                className='form__icon-visibility-cadastro'
+                                src={confirmVisibility ? '/images/olho.png' : '/images/visivel.png'}
+                                alt="" />
+                        </div>
+
                     </div>
                     <div className="form__div-erros">
                         <p style={{ color: passwordRequirements.minLength ? 'green' : 'red' }}>

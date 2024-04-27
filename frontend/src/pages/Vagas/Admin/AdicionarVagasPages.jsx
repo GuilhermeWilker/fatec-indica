@@ -125,6 +125,7 @@ export default function AdicionarVagasPage() {
                                 <option value="estagio">Estágio</option>
                                 <option value="junior">Júnior</option>
                                 <option value="pleno">Pleno</option>
+                                <option value="pleno">Sênior</option>
                             </select>
                         </div>
                     </article>
