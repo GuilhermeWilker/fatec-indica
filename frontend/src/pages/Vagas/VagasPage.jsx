@@ -124,7 +124,12 @@ export default function VagasPage() {
 
                         <h3 className='card-vaga__cargo'>{vaga.cargo_vaga}</h3>
                         <div>
-                            <p className='card-vaga__salario'>Salário: R$ {vaga.salario_vaga}</p>
+                            <p className='card-vaga__salario'>
+                                Salário: {vaga.salario_vaga.toLocaleString('pt-BR', {
+                                    style: 'currency', currency: 'BRL'
+                                })}
+                            </p>
+
                             <small className='card-vaga__local'>Local: {vaga.cidade_vaga}</small>
                         </div>
 
