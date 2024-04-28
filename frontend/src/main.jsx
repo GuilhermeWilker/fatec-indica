@@ -21,7 +21,7 @@ import ProtectedAdminRoutes from './context/ProtectedAdminRoutes.jsx';
 import AdicionarVagasPage from './pages/Vagas/Admin/AdicionarVagasPages.jsx';
 import VagasPage from './pages/Vagas/VagasPage.jsx';
 import ProtectedAlunoRoutes from './context/ProtectedAlunoRoutes.jsx';
-import Footer from './components/Footer.jsx';
+// import Footer from './components/Footer.jsx';
 import PoliticaPrivacidadePage from './pages/PoliticaPrivacidade/PoliticaPrivacidadePage.jsx';
 import EditarVagasPages from './pages/Vagas/Admin/EditarVagasPage.jsx';
 
@@ -59,9 +59,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             </Route>
           </Routes>
         </div>
-
-
-        <Footer />
       </BrowserRouter>
     </AuthProvider>
   </React.StrictMode>,
