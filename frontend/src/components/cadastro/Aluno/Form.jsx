@@ -1,5 +1,7 @@
 import '../form.css'
 import { useState } from 'react'
+import InputMask from 'react-input-mask';
+
 
 export default function Form() {
     const [step, setStep] = useState(0)
@@ -55,13 +57,16 @@ export default function Form() {
                     </div>
                     <div className="form__div">
                         <label htmlFor="cel">Celular:*</label>
-                        <input
+                        <InputMask
+                            mask="(99) 99999-9999"
                             type="text"
                             name="numero_celular_aluno"
-                            placeholder="(11)91234-5687"
+                            placeholder="(11) 91234-5687"
                             value={formData.numero_celular_aluno}
                             onChange={handleChange}
-                            required />
+                            required
+                        />
+
                     </div>
                     <div className="form__div">
                         <label htmlFor="email">E-mail:*</label>
