@@ -217,7 +217,17 @@ export default function Form() {
                                 src={confirmVisibility ? '/images/olho.png' : '/images/visivel.png'}
                                 alt="" />
                         </div>
+                    </div>
+                    <div className="form__div">
+                        <div className='checkbox'>
+                            <input type="checkbox" required />
+                            <label>Declaro que todas as informações são verdadeiras</label>
+                        </div>
 
+                        <div className='checkbox'>
+                            <input type="checkbox" name="receber_vagas" value={formData.receber_vaga} required />
+                            <label htmlFor="receber_vagas">Deseja receber vagas por email??</label>
+                        </div>
                     </div>
                     <div className="form__div-erros">
                         <p style={{ color: passwordRequirements.minLength ? 'green' : 'red' }}>

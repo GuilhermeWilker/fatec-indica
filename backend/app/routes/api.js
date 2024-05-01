@@ -1,6 +1,7 @@
 import express from 'express'
 import db from '../database/db.js'
 const router = express.Router()
+import { enviar_vagas_alunos } from '../services/mailer.js'
 
 router.get("/vagas", (req, res) => {
     db.query(
@@ -51,8 +52,39 @@ router.post('/vaga', (req, res) => {
     ]
 
     db.query(sql, values, (err, result) => {
-        if (err) throw err
+        if (err) {
+            console.error('Erro ao cadastrar vaga:', err);
+            return res.status(500).send('Erro ao cadastrar vaga');
+        }
+
         console.log('Vaga Cadastrada com Sucesso!')
+
+        const q = `SELECT email_aluno FROM tb_cadastro_aluno WHERE receber_vaga = true;`
+        db.query(q, (err, destinatario) => {
+            if (err) {
+                console.error('Erro ao buscar destinatários:', err);
+                return res.status(500).send('Erro ao buscar destinatários');
+            }
+
+            const emailsDestinatario = destinatario.map((row) => row.email_aluno)
+
+            // [ Preparando os dados a serem enviados ]
+            emailsDestinatario.forEach((emailDestinatario) => {
+                const vagaDetails = {
+                    cargo: cargo_vaga,
+                    empresa: empresa_vaga,
+                    salario: salario_vaga,
+                    local: `${cidade_vaga}, ${estado_vaga}`,
+                    nivelcargo: nivelcargo_vaga,
+                    link: link_vaga,
+                };
+
+                // [ Enviando notificações por e-mail para os alunos ]
+                enviar_vagas_alunos(emailDestinatario, vagaDetails);
+            })
+
+            res.status(200).send('Vaga cadastrada com sucesso e e-mails enviados');
+        })
     })
 })
 

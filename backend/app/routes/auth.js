@@ -108,7 +108,6 @@ router.post("/cadastro/aluno", (req, res) => {
     ]
 
     db.query(sql, values, (err, results) => {
-
         if (err) {
             return res.status(500).json({ error: 'Erro ao Cadastrar Aluno' })
         }
